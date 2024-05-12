@@ -9,13 +9,21 @@ import { createClient, type ClientConfig } from '@sanity/client';
  * @returns {Object} object - API Gateway Lambda Proxy Output Format
  *
  */
-
+/*
 const sanityClientConfig: ClientConfig = {
     projectId: 'on7y4gyd',
     dataset: 'production',
     useCdn: true,
     apiVersion: '2023-12-31',
     token: 'skfogjSzO4rgNYRZgNJvQLS6YnqP44PQvTN726zgvxVDj311Plme249IHgilUi04AlOk3CvEPmc1l38rB8tomkbU7kcuBUefSs3CY2WL0mS0BPtwLkgFqtZMz1jqAGMZXrSLGcr4wAmaTDAEBMnCt3MFbeU0C6EYZn6sHUna1QmTzgxQ3jcJ',
+}
+*/
+const sanityClientConfig: ClientConfig = {
+    projectId: process.env.SANITY_PROJECT_ID,
+    dataset: process.env.SANITY_DATASET,
+    useCdn: process.env.SANITY_USE_CDN === 'true',
+    apiVersion: process.env.SANITY_API_VERSION,
+    token: process.env.SANITY_SECRET_TOKEN,
 }
 
 interface EventProps {
@@ -30,8 +38,6 @@ interface EventProps {
 
 export const lambdaHandler = async (event: EventProps): Promise<any> => {
     try {
-        console.log(`event`);
-        console.log(event);
         /*
          {
             version: '0',
@@ -59,22 +65,19 @@ export const lambdaHandler = async (event: EventProps): Promise<any> => {
             }
               
             sanityClient.create(doc).then((res) => {
-                console.log(`User was created, document ID is ${res._id}`)
+                return {
+                    statusCode: 200,
+                    body: JSON.stringify({
+                        message: `User was created, document ID is ${res._id}`,
+                    }),
+                };
             })
         }
-        
-        return {
-            statusCode: 200,
-            body: JSON.stringify({
-                message: 'hello world',
-            }),
-        };
     } catch (err) {
-        console.log(err);
         return {
             statusCode: 500,
             body: JSON.stringify({
-                message: 'some error happened',
+                message: `some error happened: ${err}`,
             }),
         };
     }
