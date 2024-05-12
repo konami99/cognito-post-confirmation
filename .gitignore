@@ -2,8 +2,6 @@
 # Created by https://www.toptal.com/developers/gitignore/api/osx,node,linux,windows,sam
 # Edit at https://www.toptal.com/developers/gitignore?templates=osx,node,linux,windows,sam
 
-env.json
-
 .cognito
 
 ### Linux ###
@@ -99,6 +97,7 @@ typings/
 .env
 .env.test
 .env*.local
+.env*.json
 
 # parcel-bundler cache (https://parceljs.org/)
 .cache
