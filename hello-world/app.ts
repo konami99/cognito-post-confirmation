@@ -64,14 +64,9 @@ export const lambdaHandler = async (event: EventProps): Promise<any> => {
                 email: event.request.userAttributes.email,
             }
               
-            sanityClient.create(doc).then((res) => {
-                return {
-                    statusCode: 200,
-                    body: JSON.stringify({
-                        message: `User was created, document ID is ${res._id}`,
-                    }),
-                };
-            })
+            await sanityClient.create(doc);
+
+            return event;
         }
     } catch (err) {
         return {
