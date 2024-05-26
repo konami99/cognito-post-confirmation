@@ -9,15 +9,6 @@ import { createClient, type ClientConfig } from '@sanity/client';
  * @returns {Object} object - API Gateway Lambda Proxy Output Format
  *
  */
-/*
-const sanityClientConfig: ClientConfig = {
-    projectId: 'on7y4gyd',
-    dataset: 'production',
-    useCdn: true,
-    apiVersion: '2023-12-31',
-    token: 'skfogjSzO4rgNYRZgNJvQLS6YnqP44PQvTN726zgvxVDj311Plme249IHgilUi04AlOk3CvEPmc1l38rB8tomkbU7kcuBUefSs3CY2WL0mS0BPtwLkgFqtZMz1jqAGMZXrSLGcr4wAmaTDAEBMnCt3MFbeU0C6EYZn6sHUna1QmTzgxQ3jcJ',
-}
-*/
 const sanityClientConfig: ClientConfig = {
     projectId: process.env.SANITY_PROJECT_ID,
     dataset: process.env.SANITY_DATASET,
